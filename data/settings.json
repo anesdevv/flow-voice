@@ -1,0 +1,12 @@
+{
+  "hotkey": "F8",
+  "mode": "hybrid",
+  "model": "tiny.en",
+  "micDevice": "default",
+  "showOverlay": true,
+  "overlayPosition": "bottom-center",
+  "autoPunctuation": true,
+  "verbalCommands": true,
+  "soundEffects": true,
+  "theme": "dark"
+}

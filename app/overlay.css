@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'Figtree';
+  src: url('fonts/Figtree-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 900;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Figtree', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.pill-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: rgba(18, 18, 24, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 1px 1px rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.pill-container.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.pill-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.mic-icon {
+  width: 18px;
+  height: 18px;
+  color: #f43f5e;
+  filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.6));
+  transition: color 0.2s, filter 0.2s;
+}
+
+.status-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f43f5e;
+  box-shadow: 0 0 8px #f43f5e;
+  animation: pulse-dot 1.2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* Audio Visualizer Equalizer */
+.equalizer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+}
+
+.bar {
+  width: 3px;
+  height: 4px;
+  background: #f43f5e;
+  border-radius: 2px;
+  transition: height 0.08s ease, background-color 0.2s;
+}
+
+.pill-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #f1f5f9;
+  white-space: nowrap;
+}
+
+/* State variations */
+.pill-container.transcribing .mic-icon,
+.pill-container.transcribing .status-dot,
+.pill-container.transcribing .bar {
+  color: #38bdf8;
+  background-color: #38bdf8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+}
+
+.pill-container.pasting .mic-icon,
+.pill-container.pasting .status-dot,
+.pill-container.pasting .bar {
+  color: #10b981;
+  background-color: #10b981;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+}

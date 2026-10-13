@@ -1,0 +1,20 @@
+{
+  "name": "flow-voice",
+  "version": "1.0.0",
+  "description": "Independent local dictation app with offline Whisper and floating overlay",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "engine": "python engine/server.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^44.7.0"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}

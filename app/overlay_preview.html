@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="overlay.css">
+  <style>
+    body {
+      background: #090a0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .pill-container {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(244, 63, 94, 0.25) !important;
+    }
+    .bar:nth-child(1) { height: 10px; }
+    .bar:nth-child(2) { height: 18px; }
+    .bar:nth-child(3) { height: 8px; }
+    .bar:nth-child(4) { height: 22px; }
+    .bar:nth-child(5) { height: 14px; }
+  </style>
+</head>
+<body>
+  <div class="pill-container visible">
+    <div class="pill-icon-wrapper">
+      <div class="status-dot"></div>
+      <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" x2="12" y1="19" y2="22"/>
+      </svg>
+    </div>
+    <div class="equalizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <div class="pill-content">
+      <div class="status-text">Listening...</div>
+    </div>
+  </div>
+</body>
+</html>

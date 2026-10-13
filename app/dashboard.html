@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowVoice - Desktop Voice Dictation</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dark-theme">
+  <!-- Custom Window Titlebar -->
+  <header class="window-titlebar">
+    <div class="titlebar-drag-region">
+      <div class="app-brand">
+        <div class="brand-glyph">
+          <img src="assets/logos/flow-symbol.svg" alt="Wispr Flow" class="brand-logo-img">
+        </div>
+        <span class="brand-title">Wispr Flow</span>
+        <span class="badge-pill">Local AI</span>
+      </div>
+    </div>
+    <div class="titlebar-status">
+      <span class="status-indicator-dot online"></span>
+      <span class="status-text">Ready · Press F8</span>
+    </div>
+    <div class="window-controls">
+      <button class="win-btn" id="btnMinimize" title="Minimize">
+        <svg viewBox="0 0 12 12"><rect y="5" width="12" height="1.5" fill="currentColor"/></svg>
+      </button>
+      <button class="win-btn" id="btnMaximize" title="Maximize">
+        <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+      </button>
+      <button class="win-btn close" id="btnClose" title="Close to Tray">
+        <svg viewBox="0 0 12 12"><path d="M1.5 1.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.3"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main App Shell -->
+  <div class="app-shell">
+    <!-- Left Sidebar Navigation -->
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="history">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span class="nav-label">Dictations</span>
+          <span class="nav-badge" id="historyCountBadge">0</span>
+        </button>
+
+        <button class="nav-item" data-tab="notes">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span class="nav-label">Scratchpad</span>
+          <span class="nav-badge" id="notesCountBadge">1</span>
+        </button>
+
+        <button class="nav-item" data-tab="dictionary">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+          <span class="nav-label">Dictionary</span>
+          <span class="nav-badge" id="dictCountBadge">0</span>
+        </button>
+
+        <button class="nav-item" data-tab="snippets">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+          <span class="nav-label">Snippets</span>
+          <span class="nav-badge" id="snipCountBadge">0</span>
+        </button>
+
+        <button class="nav-item" data-tab="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span class="nav-label">Settings</span>
+        </button>
+      </nav>
+
+      <!-- Sidebar Bottom Card -->
+      <div class="sidebar-footer">
+        <button class="dictate-action-btn" id="btnManualDictate">
+          <div class="dictate-glow"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15a3 3 0 01-3-3V4.5a3 3 0 116 0v7.5a3 3 0 01-3 3z" />
+          </svg>
+          <span id="dictateBtnLabel">Dictate Now</span>
+          <kbd class="shortcut-tag">F8</kbd>
+        </button>
+
+        <div class="system-status-card">
+          <div class="status-row">
+            <span class="status-label">Model</span>
+            <span class="status-val highlight" id="sidebarModelLabel">base.en (INT8)</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">Privacy</span>
+            <span class="status-val success">100% Offline</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Stage -->
+    <main class="content-stage">
+      <!-- ================= TAB 1: HISTORY ================= -->
+      <section class="tab-pane active" id="pane-history">
+        <div class="pane-header">
+          <div class="pane-title-group">
+            <h1 class="pane-title">Activity History</h1>
+            <p class="pane-subtitle">Your transcribed voice dictations across all applications</p>
+          </div>
+          <div class="pane-actions">
+            <button class="btn-secondary" id="btnClearHistory">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+              Clear History
+            </button>
+          </div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="search-filter-bar">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="historySearchInput" placeholder="Search dictation history..." autocomplete="off">
+            <button class="clear-search-btn" id="btnClearSearch" style="display:none;">&times;</button>
+          </div>
+          <div class="filter-pills" id="historyFilters">
+            <button class="filter-pill active" data-filter="all">All</button>
+            <button class="filter-pill" data-filter="notepad">Notepad</button>
+            <button class="filter-pill" data-filter="chrome">Chrome / Web</button>
+            <button class="filter-pill" data-filter="code">Code / Editors</button>
+            <button class="filter-pill" data-filter="terminal">Terminal</button>
+          </div>
+        </div>
+
+        <!-- History Feed List -->
+        <div class="history-feed" id="historyFeed">
+          <!-- Populated dynamically by dashboard.js -->
+        </div>
+
+        <!-- History Empty State -->
+        <div class="empty-state" id="historyEmptyState" style="display: none;">
+          <div class="empty-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15a3 3 0 01-3-3V4.5a3 3 0 116 0v7.5a3 3 0 01-3 3z" />
+            </svg>
+          </div>
+          <h3>No dictations yet</h3>
+          <p>Hold or tap <strong>F8</strong> anywhere on your desktop to dictate speech into any app.</p>
+        </div>
+      </section>
+
+      <!-- ================= TAB 2: NOTES ================= -->
+      <section class="tab-pane" id="pane-notes">
+        <div class="notes-workspace">
+          <!-- Left Notes Column: List -->
+          <div class="notes-sidebar-panel">
+            <div class="notes-panel-header">
+              <div class="notes-panel-title">
+                <h2>Notes</h2>
+                <span class="count-tag" id="notesListCount">0</span>
+              </div>
+              <button class="btn-primary-sm" id="btnNewNote">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                New Note
+              </button>
+            </div>
+
+            <div class="notes-search-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" id="notesSearchInput" placeholder="Search notes...">
+            </div>
+
+            <div class="notes-card-list" id="notesCardList">
+              <!-- Populated dynamically by dashboard.js -->
+            </div>
+          </div>
+
+          <!-- Right Notes Column: Active Note Editor -->
+          <div class="note-editor-panel">
+            <div class="editor-header">
+              <input type="text" id="activeNoteTitle" class="note-title-field" placeholder="Note Title...">
+              
+              <div class="editor-toolbar">
+                <button class="editor-tool-btn mic-record" id="btnDictateIntoNote" title="Dictate directly into this note">
+                  <span class="rec-dot"></span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15a3 3 0 01-3-3V4.5a3 3 0 116 0v7.5a3 3 0 01-3 3z" />
+                  </svg>
+                  <span id="noteMicBtnLabel">Voice Type</span>
+                </button>
+                <button class="editor-tool-btn" id="btnCopyNote" title="Copy note text">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                  Copy
+                </button>
+                <button class="editor-tool-btn danger" id="btnDeleteNote" title="Delete note">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="editor-meta-bar">
+              <span id="noteTimestampLabel">Last edited: Just now</span>
+              <span class="meta-dot">·</span>
+              <span id="noteStatsLabel">0 words, 0 characters</span>
+            </div>
+
+            <div class="editor-body">
+              <textarea id="activeNoteContent" placeholder="Start typing, or press F8 to dictate your thoughts..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: DICTIONARY (CUSTOM VOCABULARY) ================= -->
+      <section class="tab-pane" id="pane-dictionary">
+        <div class="pane-header">
+          <div class="pane-title-group">
+            <h1 class="pane-title">Custom Dictionary</h1>
+            <p class="pane-subtitle">Teach Whisper unusual names, tech jargon, and domain acronyms for 100% accuracy</p>
+          </div>
+          <div class="dict-header-actions">
+            <input type="text" id="newWordInput" placeholder="Add word or phrase (e.g. PyTorch, Wispr)..." class="search-input dict-input">
+            <button class="btn-primary-sm" id="btnAddWord">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Word
+            </button>
+          </div>
+        </div>
+
+        <div class="dictionary-card">
+          <div class="dictionary-info-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="banner-icon">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <span>Words added here are given priority during speech-to-text recognition so specialized names and technical terms never get misspelled.</span>
+          </div>
+          <div class="dictionary-tag-cloud" id="dictionaryTagCloud">
+            <!-- Tags rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB: SNIPPETS (TEXT EXPANSIONS) ================= -->
+      <section class="tab-pane" id="pane-snippets">
+        <div class="pane-header">
+          <div class="pane-title-group">
+            <h1 class="pane-title">Snippets</h1>
+            <p class="pane-subtitle">Shortcuts that instantly expand into longer templates and canned text</p>
+          </div>
+          <button class="btn-primary-sm" id="btnOpenNewSnippetModal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New Snippet
+          </button>
+        </div>
+
+        <div class="snippets-container" id="snippetsContainer">
+          <!-- Snippets rendered by JS -->
+        </div>
+      </section>
+
+      <!-- ================= TAB: SETTINGS ================= -->
+      <section class="tab-pane" id="pane-settings">
+        <div class="pane-header">
+          <div class="pane-title-group">
+            <h1 class="pane-title">Settings</h1>
+            <p class="pane-subtitle">Configure hotkeys, speech recognition, audio hardware, and overlay preferences</p>
+          </div>
+          <button class="btn-primary-sm" id="btnSaveSettings">Save Changes</button>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Card: Hotkey & Trigger -->
+          <div class="settings-card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M6 12h.001M10 12h.001M14 12h.001M18 12h.001M7 16h10"/>
+                </svg>
+              </div>
+              <div class="card-info">
+                <h3>Global Hotkey & Trigger</h3>
+                <p>Customize how you activate dictation from any application</p>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Activation Key</label>
+                <span>The key you press to start recording voice</span>
+              </div>
+              <div class="setting-control">
+                <select id="settingHotkey" class="form-select">
+                  <option value="F8" selected>F8 (Default)</option>
+                  <option value="F9">F9</option>
+                  <option value="F7">F7</option>
+                  <option value="F10">F10</option>
+                  <option value="F6">F6</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Trigger Behavior</label>
+                <span>How the hotkey responds to presses</span>
+              </div>
+              <div class="setting-control">
+                <select id="settingMode" class="form-select">
+                  <option value="hybrid" selected>Hybrid (Hold to Speak OR Tap to Toggle)</option>
+                  <option value="ptt">Push-to-Talk (Hold only)</option>
+                  <option value="toggle">Toggle (Tap to Start / Tap to Finish)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: AI Speech Model -->
+          <div class="settings-card">
+            <div class="card-header">
+              <div class="card-icon ai">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <div class="card-info">
+                <h3>Speech Recognition Engine</h3>
+                <p>Offline CTranslate2 Whisper model configuration</p>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Whisper Model</label>
+                <span>Larger models offer higher accuracy with slightly more CPU compute</span>
+              </div>
+              <div class="setting-control">
+                <select id="settingModel" class="form-select">
+                  <option value="tiny.en" selected>tiny.en (39M params) - ⚡ Turbo Ultra-Fast [Instant Dictation]</option>
+                  <option value="base.en">base.en (74M params) - 🎯 Balanced High Precision</option>
+                  <option value="small.en">small.en (244M params) - 💎 Studio Grade</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Verbal Commands</label>
+                <span>Say <em>"press enter"</em>, <em>"new line"</em>, or <em>"period"</em> to format automatically</span>
+              </div>
+              <div class="setting-control">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settingVerbalCommands" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Smart Auto-Punctuation</label>
+                <span>Automatically add commas, periods, and capitalize sentences</span>
+              </div>
+              <div class="setting-control">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settingAutoPunctuation" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: Audio Hardware -->
+          <div class="settings-card">
+            <div class="card-header">
+              <div class="card-icon audio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="23"/>
+                  <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+              </div>
+              <div class="card-info">
+                <h3>Microphone & Audio Input</h3>
+                <p>Native hardware sampling and live level calibration</p>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Input Device</label>
+                <span>Select your preferred audio capture microphone</span>
+              </div>
+              <div class="setting-control">
+                <select id="settingMicDevice" class="form-select">
+                  <option value="default" selected>Default - Microphone (XOX USB 2.1)</option>
+                  <option value="mapper">Microsoft Sound Mapper</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Live Mic Activity Test</label>
+                <span>Speak to verify your microphone level reacts</span>
+              </div>
+              <div class="setting-control mic-test-box">
+                <div class="mic-level-track">
+                  <div class="mic-level-fill" id="micLevelFill"></div>
+                </div>
+                <span class="mic-level-label" id="micLevelLabel">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: Floating Pill Overlay -->
+          <div class="settings-card">
+            <div class="card-header">
+              <div class="card-icon overlay">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                  <line x1="9" y1="21" x2="9" y2="9"/>
+                </svg>
+              </div>
+              <div class="card-info">
+                <h3>Floating Pill Overlay</h3>
+                <p>Stealth visualizer pill displayed while dictating</p>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Show Floating Overlay</label>
+                <span>Display glassmorphism pill with live voice visualizer</span>
+              </div>
+              <div class="setting-control">
+                <label class="toggle-switch">
+                  <input type="checkbox" id="settingShowOverlay" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-text">
+                <label>Position</label>
+                <span>Screen placement of the floating pill</span>
+              </div>
+              <div class="setting-control">
+                <select id="settingOverlayPos" class="form-select">
+                  <option value="bottom-center" selected>Bottom Center</option>
+                  <option value="bottom-right">Bottom Right</option>
+                  <option value="top-center">Top Center</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Snippet Creation Modal -->
+  <div class="modal-backdrop" id="snippetModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Text Snippet</h3>
+        <button class="modal-close-btn" id="btnCloseSnippetModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Shortcut Trigger</label>
+          <input type="text" id="snippetShortcutInput" placeholder="e.g. ;email or ;intro" class="form-input">
+          <span class="field-hint">Starts with a symbol like ';' or '/' so it doesn't trigger accidentally</span>
+        </div>
+        <div class="form-group">
+          <label>Label</label>
+          <input type="text" id="snippetLabelInput" placeholder="e.g. Work Email, Calendly link" class="form-input">
+        </div>
+        <div class="form-group">
+          <label>Expanded Text</label>
+          <textarea id="snippetTextInput" placeholder="The full phrase, greeting, or paragraph to insert..." class="form-textarea" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btnCancelSnippet">Cancel</button>
+        <button class="btn-primary-sm" id="btnSaveSnippet">Save Snippet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast">
+    <span class="toast-icon">✓</span>
+    <span class="toast-msg" id="toastMsg">Action completed</span>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

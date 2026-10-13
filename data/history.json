@@ -1,0 +1,74 @@
+[
+  {
+    "id": "item_1791844694682",
+    "text": "Test",
+    "appTitle": "FlowVoice - Desktop Voice Dictation",
+    "duration": 2.55,
+    "latency": 8.51,
+    "timestamp": "2026-10-12T22:38:14.682Z",
+    "wordCount": 1
+  },
+  {
+    "id": "item_1791844657782",
+    "text": "That's",
+    "appTitle": "FlowVoice - Desktop Voice Dictation",
+    "duration": 2.92,
+    "latency": 8.6,
+    "timestamp": "2026-10-12T22:37:37.782Z",
+    "wordCount": 1
+  },
+  {
+    "id": "item_1791842525321",
+    "text": "I need you to do me a something. No, no. I want to do something.",
+    "appTitle": "New Tab - Brave",
+    "duration": 7.6,
+    "latency": 6.46,
+    "timestamp": "2026-10-12T22:02:05.321Z",
+    "wordCount": 15
+  },
+  {
+    "id": "item_1791842498636",
+    "text": "Test, test.",
+    "appTitle": "New Tab - Brave",
+    "duration": 3.1,
+    "latency": 5.79,
+    "timestamp": "2026-10-12T22:01:38.636Z",
+    "wordCount": 2
+  },
+  {
+    "id": "item_hist_1",
+    "text": "How to build an offline voice dictation app with faster whisper and Electron",
+    "appTitle": "YouTube",
+    "duration": 3.4,
+    "latency": 0.42,
+    "timestamp": "2026-10-12T22:15:00.000Z",
+    "wordCount": 13
+  },
+  {
+    "id": "item_hist_2",
+    "text": "const whisperEngine = new WhisperEngine({ model: 'base.en', computeType: 'int8' });",
+    "appTitle": "Visual Studio Code",
+    "duration": 4.1,
+    "latency": 0.38,
+    "timestamp": "2026-10-12T22:08:00.000Z",
+    "wordCount": 11
+  },
+  {
+    "id": "item_hist_3",
+    "text": "Meeting notes: sync with team on Thursday at 3 PM to review the Wispr Flow design system and local model latency.",
+    "appTitle": "Notepad",
+    "duration": 5.8,
+    "latency": 0.51,
+    "timestamp": "2026-10-12T21:45:00.000Z",
+    "wordCount": 21
+  },
+  {
+    "id": "item_hist_4",
+    "text": "Can you summarize the difference between tiny.en and base.en in terms of word error rate?",
+    "appTitle": "Google Chrome",
+    "duration": 3.9,
+    "latency": 0.39,
+    "timestamp": "2026-10-12T21:20:00.000Z",
+    "wordCount": 16
+  }
+]
