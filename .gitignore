@@ -32,3 +32,8 @@ Desktop.ini
 # Logs
 *.log
 npm-debug.log*
+
+# Local user data (auto-regenerated on first run from defaults in app/data_store.js)
+# Ship *.example.json as templates; never commit real user data.
+data/*.json
+!data/*.example.json

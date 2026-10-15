@@ -1,11 +1,13 @@
 [
-  "Antigravity",
   "API",
+  "Antigravity",
   "Electron",
   "Faster-Whisper",
+  "FlowVoice",
   "Kubernetes",
   "PyTorch",
   "TypeScript",
   "UI/UX",
+  "Whisper",
   "Wispr Flow"
 ]
