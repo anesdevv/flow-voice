@@ -124,7 +124,7 @@ cd flow-voice
 npm install
 
 # Python speech engine dependencies
-pip install numpy sounddevice faster-whisper websockets pyperclip pynput scipy
+pip install -r requirements.txt
 ```
 
 ### 2 · Run
@@ -192,6 +192,8 @@ flow-voice/
 ├── data/                         # Local user data (git-ignored)
 │   └── *.example.json            # Templates: history, notes, settings, ...
 ├── package.json
+├── requirements.txt              # Python engine dependencies
+├── LICENSE
 └── README.md
 ```
 
@@ -214,7 +216,7 @@ FlowVoice is built around one idea: **your voice never leaves your machine.**
 
 ## 📄 License
 
-Released under the **ISC License** (see `package.json`).
+Released under the **ISC License** — see the [`LICENSE`](LICENSE) file.
 
 <div align="center">
 

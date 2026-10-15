@@ -1,0 +1,15 @@
+# FlowVoice — Python speech engine dependencies
+# Tested on Windows 11 with Python 3.14.
+#
+#   pip install -r requirements.txt
+#
+# faster-whisper pulls in its own runtime stack (ctranslate2, tokenizers,
+# huggingface-hub, onnxruntime, av), so only the direct imports are listed here.
+
+numpy>=2.4
+sounddevice>=0.5
+faster-whisper>=1.2
+websockets>=17.0
+pyperclip>=1.11
+pynput>=1.8
+scipy>=1.18
