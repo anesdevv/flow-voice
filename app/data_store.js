@@ -74,7 +74,7 @@ const DEFAULT_NOTES = [
   {
     id: "welcome_note",
     title: "Welcome to FlowVoice Notes 🎙️",
-    content: "## Welcome to your voice-powered scratchpad!\n\nThis is your private, offline note-taking hub, inspired by Wispr Flow.\n\n### How to use:\n- **Dictate directly into this note**: Click the **Start Dictation** button above, or press **F8** anywhere while this window is active!\n- **Formatting**: Supports markdown headers (`##`), bullet points, and quick voice commands.\n- **Voice Commands**: Say *'new line'* for line breaks, *'comma'* for `,`, or *'period'* for `.`.\n\nEnjoy 100% private, offline speech-to-text without limits!",
+    content: "## Welcome to your voice-powered scratchpad!\n\nThis is your private, offline note-taking hub.\n\n### How to use:\n- **Dictate directly into this note**: Click the **Start Dictation** button above, or press **F8** anywhere while this window is active!\n- **Formatting**: Supports markdown headers (`##`), bullet points, and quick voice commands.\n- **Voice Commands**: Say *'new line'* for line breaks, *'comma'* for `,`, or *'period'* for `.`.\n\nEnjoy 100% private, offline speech-to-text without limits!",
     updatedAt: new Date().toISOString(),
     createdAt: new Date().toISOString()
   }
@@ -144,7 +144,6 @@ function saveSettings(newSettings) {
 // --- Dictionary API (Custom Vocabulary) ---
 const DICTIONARY_FILE = path.join(DATA_DIR, "dictionary.json");
 const DEFAULT_DICTIONARY = [
-  "Wispr Flow",
   "Whisper",
   "FlowVoice",
   "Antigravity",

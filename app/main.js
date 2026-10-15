@@ -124,7 +124,7 @@ function createOverlayWindow() {
   });
 }
 
-// --- Main Dashboard Window (Wispr Flow UI) ---
+// --- Main Dashboard Window (Dashboard UI) ---
 function createDashboardWindow() {
   dashboardWindow = new BrowserWindow({
     width: 980,

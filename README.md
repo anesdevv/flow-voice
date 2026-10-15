@@ -21,7 +21,7 @@ Speak anywhere. Your words are transcribed on-device and typed straight into the
 </div>
 
 > [!NOTE]
-> FlowVoice is an independent project **inspired by the reverse-engineered architecture of Wispr Flow**. Everything runs locally on your machine — the only network access is the one-time Whisper model download.
+> FlowVoice is an independent, fully offline voice dictation project. Everything runs locally on your machine — the only network access is the one-time Whisper model download.
 
 ---
 

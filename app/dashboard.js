@@ -702,7 +702,7 @@ async function loadDictionary() {
   if (window.api?.getDictionary) {
     dictionaryWords = await window.api.getDictionary();
   } else {
-    dictionaryWords = ["Wispr Flow", "Antigravity", "PyTorch", "Kubernetes", "Whisper", "TypeScript"];
+    dictionaryWords = ["Antigravity", "PyTorch", "Kubernetes", "Whisper", "TypeScript"];
   }
   renderDictionary();
 }

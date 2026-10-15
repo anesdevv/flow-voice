@@ -2,7 +2,7 @@
   {
     "id": "welcome_note",
     "title": "Welcome to FlowVoice Notes 🎙️",
-    "content": "## Welcome to your voice-powered scratchpad!\n\nThis is your private, offline note-taking hub, inspired by Wispr Flow.\n\n### How to use:\n- **Dictate directly into this note**: Click the **Start Dictation** button above, or press **F8** anywhere while this window is active!\n- **Formatting**: Supports markdown headers (`##`), bullet points, and quick voice commands.\n- **Voice Commands**: Say *'new line'* for line breaks, *'comma'* for `,`, or *'period'* for `.`.\n\nEnjoy 100% private, offline speech-to-text without limits!",
+    "content": "## Welcome to your voice-powered scratchpad!\n\nThis is your private, offline note-taking hub.\n\n### How to use:\n- **Dictate directly into this note**: Click the **Start Dictation** button above, or press **F8** anywhere while this window is active!\n- **Formatting**: Supports markdown headers (`##`), bullet points, and quick voice commands.\n- **Voice Commands**: Say *'new line'* for line breaks, *'comma'* for `,`, or *'period'* for `.`.\n\nEnjoy 100% private, offline speech-to-text without limits!",
     "updatedAt": "2026-10-12T21:05:28.632Z",
     "createdAt": "2026-10-12T21:05:28.633Z"
   }
